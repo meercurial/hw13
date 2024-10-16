@@ -36,7 +36,7 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode('Код 200!')
+                setCode(res.data.code)
                 setImage(success200)
                 // дописать
                 setText(res.data.text)
@@ -57,7 +57,7 @@ const HW13 = () => {
                 );
             })
             .finally(() => {
-               setLoadingButton(null)
+                setLoadingButton(null)
             })
     }
 
