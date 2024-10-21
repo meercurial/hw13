@@ -36,31 +36,38 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode(res.data.code)
+                setCode('Код 200!')
                 setImage(success200)
                 // дописать
-                setText(res.data.text)
+                setText(res.data.errorText)
                 setInfo(res.data.info)
+
 
             })
             .catch((e) => {
                 // дописать
-                setCode(`Код ${e.code}`)
-                setText(e.text);
-                setInfo(e.message)
-                setImage(
-                    e.response?.status === 400
-                        ? error400
-                        : e.response?.status === 500
-                            ? error500
-                            : errorUnknown
-                );
+                if (e.response.status === 0) {
+                    setImage(errorUnknown)
+                    setCode(`Error!`)
+                    setText('Network error');
+                    setInfo('axios error')
+                } else {
+                    setCode(`Ошибка ${e.response.status}!`)
+                    setText(e.response.data.errorText);
+                    setInfo(e.response.data.info)
+                    setImage(
+                        e.response?.status === 400
+                            ? error400
+                            : e.response?.status === 500
+                                ? error500 : ''
+                    );
+                }
+
             })
             .finally(() => {
                 setLoadingButton(null)
             })
     }
-
     return (
         <div id={'hw13'}>
             <div className={s2.hwTitle}>Homework #13</div>
