@@ -50,7 +50,7 @@ const HW13 = () => {
                     setImage(errorUnknown)
                     setCode(`Error!`)
                     setText('Network error');
-                    setInfo('axios error')
+                    setInfo('Error')
                 } else {
                     setCode(`Ошибка ${e.response.status}!`)
                     setText(e.response.data.errorText);
